@@ -83,56 +83,40 @@ const posts = [
 const divElement = document.getElementById('container');
 console.log(divElement);
 
-posts.forEach(element => {
-    const postContainer = document.createElement('div');
-    postContainer.classList.add('post');
-    divElement.append(postContainer);
-    
-    const postHeader = document.createElement('div');
-    postHeader.classList.add('post_header');
-    postContainer.append(postHeader);
+posts.forEach(post => {
 
-    const postMeta = document.createElement('div');
-    postMeta.classList.add('post-meta');
-    postHeader.append(postMeta);
+    divElement.innerHTML += `
+        <div class="post">
+            <div class="post__header">
+                <div class="post-meta">                    
+                    <div class="post-meta__icon">
+                        <img class="profile-pic" src="${post.author["image"]}" alt="Phil Mangione">                    
+                    </div>
+                    <div class="post-meta__data">
+                        <div class="post-meta__author">${post.author["name"]}
+                        </div>
+                        <div class="post-meta__time">${post.created}
+                        </div>
+                    </div>                    
+                </div>
+            </div>
+            <div class="post__text">${post.content}</div>
+            <div class="post__image">
+                <img src="${post.media}" alt="">
+            </div>
+            <div class="post__footer">
+                <div class="likes js-likes">
+                    <div class="likes__cta">
+                        <a class="like-button  js-like-button" href="#" data-postid="${post.id}">
+                        <i class="like-button__icon fas fa-thumbs-up" aria-hidden="true"></i>
+                        <span class="like-button__label">Mi Piace</span>
+                        </a>
+                    </div>
+                    <div class="likes__counter">
+                        Piace a <b id="like-counter-1" class="js-likes-counter">${post.likes}</b> persone
+                    </div>
+                </div> 
+            </div>            
+        </div>`;
 
-    const postIcon = document.createElement('div');
-    postIcon.classList.add('post-meta__icon');
-    postMeta.append(postIcon);
-
-    const postData = document.createElement('div');
-    postData.classList.add('post-meta__data');
-    postMeta.append(postData);
-
-    const postMetaAuthor = document.createElement('div');
-    postMetaAuthor.classList.add('post-meta__author');
-    postData.append(postMetaAuthor);
-
-    const postMetaTime = document.createElement('div');
-    postMetaTime.classList.add('post-meta__time');
-    postData.append(postMetaTime);
-
-    const postText = document.createElement('div');
-    postText.classList.add('post__text');
-    postContainer.append(postText);
-
-    const postImage = document.createElement('div');
-    postImage.classList.add('post__image');
-    postContainer.append(postImage);
-
-    const postFooter = document.createElement('div');
-    postFooter.classList.add('post__footer');
-    postContainer.append(postFooter);
-
-    const postLike = document.createElement('div');
-    postLike.classList.add('likes', 'js-likes');
-    postFooter.append(postLike);
-
-    const postLikeCta = document.createElement('div');
-    postLikeCta.classList.add('likes__cta');
-    postLike.append(postLikeCta);
-
-    const postLikeCounter = document.createElement('div');
-    postLikeCounter.classList.add('likes__counter');
-    postLike.append(postLikeCounter);
 });
